@@ -20,7 +20,7 @@ export const portfolio: PortfolioData = {
     email: 'abhishek.se.contact@gmail.com',
     location: 'Bangalore, KA, India',
     githubUsername: 'AbhishekKumarSingh07',
-    resumeUrl: '/Resume_Abhishek_Singh.pdf',
+    resumeUrl: 'https://drive.google.com/uc?export=download&id=1zMRzEDFqyvZ7JEhnj8uZOYELEWIWh6gt',
     availableForWork: true,
     availabilityNote: 'Open to full-time & freelance opportunities',
   },
