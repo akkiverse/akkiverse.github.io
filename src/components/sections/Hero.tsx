@@ -6,24 +6,9 @@ import { SocialIcon } from '@/components/ui/SocialIcon';
 import { portfolio } from '@/data/portfolio';
 import { scrollToSection } from '@/utils';
 
-/** Single line of Python code rendered with syntax colouring */
-const PyLine: React.FC<{ children: React.ReactNode; delay?: number }> = ({ children, delay = 0 }) => (
-  <motion.div
-    initial={{ opacity: 0, x: -8 }}
-    animate={{ opacity: 1, x: 0 }}
-    transition={{ delay, duration: 0.4 }}
-    className="flex items-start gap-3"
-  >
-    <span className="text-text-muted font-mono text-xs select-none mt-[3px] w-4 text-right shrink-0">
-      {/* line numbers filled by parent */}
-    </span>
-    <span className="font-mono text-sm leading-relaxed">{children}</span>
-  </motion.div>
-);
-
 /**
- * Hero section styled as a Python REPL / script output.
- * Avoids all web/UI developer visual clichés.
+ * Hero section styled as a Python script / terminal output.
+ * No unused components — PyLine removed.
  */
 export const Hero: React.FC = () => {
   const { displayText } = useTypewriter({
@@ -33,57 +18,75 @@ export const Hero: React.FC = () => {
     pauseDuration: 2400,
   });
 
-  const lines = [
-    { delay: 0.2, content: (
-      <span>
-        <span className="py-keyword">class </span>
-        <span className="py-class">AbhishekSingh</span>
-        <span className="text-text-secondary">(Engineer):</span>
-      </span>
-    )},
-    { delay: 0.35, content: (
-      <span className="ml-6">
-        <span className="py-string">&quot;&quot;&quot;</span>
-        <span className="py-string"> Senior Python &amp; GenAI Engineer </span>
-        <span className="py-string">&quot;&quot;&quot;</span>
-      </span>
-    )},
-    { delay: 0.5, content: (
-      <span className="ml-6">
-        <span className="py-keyword">specialisation </span>
-        <span className="text-text-secondary">= [</span>
-        <span className="py-string">&quot;FastAPI&quot;</span>
-        <span className="text-text-secondary">, </span>
-        <span className="py-string">&quot;RAG&quot;</span>
-        <span className="text-text-secondary">, </span>
-        <span className="py-string">&quot;LangChain&quot;</span>
-        <span className="text-text-secondary">, </span>
-        <span className="py-string">&quot;Django&quot;</span>
-        <span className="text-text-secondary">]</span>
-      </span>
-    )},
-    { delay: 0.65, content: (
-      <span className="ml-6">
-        <span className="py-keyword">experience </span>
-        <span className="text-text-secondary">= </span>
-        <span className="py-number">6</span>
-        <span className="py-comment">  # years</span>
-      </span>
-    )},
-    { delay: 0.8, content: (
-      <span className="ml-6">
-        <span className="py-keyword">location </span>
-        <span className="text-text-secondary">= </span>
-        <span className="py-string">&quot;Bangalore, India&quot;</span>
-      </span>
-    )},
-    { delay: 0.95, content: (
-      <span className="ml-6">
-        <span className="py-keyword">status </span>
-        <span className="text-text-secondary">= </span>
-        <span className="py-string">&quot;open_to_opportunities&quot;</span>
-      </span>
-    )},
+  const lines: { delay: number; content: React.ReactNode }[] = [
+    {
+      delay: 0.2,
+      content: (
+        <span>
+          <span className="py-keyword">class </span>
+          <span className="py-class">AbhishekSingh</span>
+          <span className="text-text-secondary">(Engineer):</span>
+        </span>
+      ),
+    },
+    {
+      delay: 0.35,
+      content: (
+        <span className="ml-6">
+          <span className="py-string">&quot;&quot;&quot;</span>
+          <span className="py-string"> Senior Python &amp; GenAI Engineer </span>
+          <span className="py-string">&quot;&quot;&quot;</span>
+        </span>
+      ),
+    },
+    {
+      delay: 0.5,
+      content: (
+        <span className="ml-6">
+          <span className="py-keyword">specialisation </span>
+          <span className="text-text-secondary">= [</span>
+          <span className="py-string">&quot;FastAPI&quot;</span>
+          <span className="text-text-secondary">, </span>
+          <span className="py-string">&quot;RAG&quot;</span>
+          <span className="text-text-secondary">, </span>
+          <span className="py-string">&quot;LangChain&quot;</span>
+          <span className="text-text-secondary">, </span>
+          <span className="py-string">&quot;Django&quot;</span>
+          <span className="text-text-secondary">]</span>
+        </span>
+      ),
+    },
+    {
+      delay: 0.65,
+      content: (
+        <span className="ml-6">
+          <span className="py-keyword">experience </span>
+          <span className="text-text-secondary">= </span>
+          <span className="py-number">6</span>
+          <span className="py-comment">  # years</span>
+        </span>
+      ),
+    },
+    {
+      delay: 0.8,
+      content: (
+        <span className="ml-6">
+          <span className="py-keyword">location </span>
+          <span className="text-text-secondary">= </span>
+          <span className="py-string">&quot;Bangalore, India&quot;</span>
+        </span>
+      ),
+    },
+    {
+      delay: 0.95,
+      content: (
+        <span className="ml-6">
+          <span className="py-keyword">status </span>
+          <span className="text-text-secondary">= </span>
+          <span className="py-string">&quot;open_to_opportunities&quot;</span>
+        </span>
+      ),
+    },
   ];
 
   return (
@@ -126,6 +129,7 @@ export const Hero: React.FC = () => {
             transition={{ delay: 0.15 }}
             className="font-mono text-base sm:text-lg text-text-secondary h-7 flex items-center"
             aria-live="polite"
+            aria-label={`Role: ${displayText}`}
           >
             <span className="text-accent-primary mr-2 text-sm">$</span>
             <span>{displayText}</span>

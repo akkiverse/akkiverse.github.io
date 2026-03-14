@@ -27,6 +27,10 @@ const HomePage: React.FC = () => (
 
 const App: React.FC = () => (
   <HashRouter>
+    {/* Animated aurora background — fixed, behind all content */}
+    <div className="aurora-bg" aria-hidden="true" />
+    <div className="aurora-mid" aria-hidden="true" />
+
     <ScrollProgressBar />
     <Navbar />
     <Routes>

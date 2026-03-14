@@ -1,5 +1,5 @@
 import React from 'react';
-import { Github, Linkedin, Twitter, Mail, ExternalLink } from 'lucide-react';
+import { Github, Linkedin, Twitter, Mail, ExternalLink, type LucideIcon } from 'lucide-react';
 import type { SocialLink } from '@/types';
 import { cx } from '@/utils';
 
@@ -9,7 +9,7 @@ interface SocialIconProps {
   className?: string;
 }
 
-const iconMap: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
+const iconMap: Record<string, LucideIcon> = {
   github: Github,
   linkedin: Linkedin,
   twitter: Twitter,
@@ -20,7 +20,7 @@ const iconMap: Record<string, React.ComponentType<{ size?: number; className?: s
  * Social icon button — minimal border style matching the Python terminal aesthetic.
  */
 export const SocialIcon: React.FC<SocialIconProps> = ({ link, size = 'md', className }) => {
-  const IconComponent = iconMap[link.icon] ?? ExternalLink;
+  const IconComponent: LucideIcon = iconMap[link.icon] ?? ExternalLink;
   const iconSize = size === 'sm' ? 14 : size === 'lg' ? 22 : 18;
 
   const sizeClasses: Record<string, string> = {

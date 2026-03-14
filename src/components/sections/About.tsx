@@ -83,10 +83,10 @@ export const About: React.FC = () => {
             >
               <div className="absolute inset-0 dot-grid opacity-30" aria-hidden="true" />
               <div className="absolute inset-0 flex flex-col items-center justify-center gap-1">
-                {/* Python logo colours on the initials */}
+                {/* Python blue + orange on initials */}
                 <div className="flex items-end gap-0 font-mono font-black text-5xl leading-none select-none">
                   <span style={{ color: '#3776ab' }}>A</span>
-                  <span style={{ color: '#f5e642' }}>K</span>
+                  <span style={{ color: '#ff6b35' }}>K</span>
                   <span style={{ color: '#3776ab' }}>S</span>
                 </div>
                 <span className="font-mono text-[10px] text-text-muted tracking-[0.2em] mt-1">

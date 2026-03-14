@@ -1,10 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Github, Linkedin, Twitter, Mail, ArrowRight } from 'lucide-react';
+import { Github, Linkedin, Twitter, Mail, ArrowRight, type LucideIcon } from 'lucide-react';
 import { SectionHeader } from '@/components/ui/SectionHeader';
 import { portfolio } from '@/data/portfolio';
 
-const iconMap: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
+const iconMap: Record<string, LucideIcon> = {
   github: Github,
   linkedin: Linkedin,
   twitter: Twitter,
@@ -12,7 +12,7 @@ const iconMap: Record<string, React.ComponentType<{ size?: number; className?: s
 };
 
 const contactDescriptions: Record<string, string> = {
-  GitHub: 'See what I\'m building',
+  GitHub: "See what I'm building",
   LinkedIn: 'Connect professionally',
   Twitter: 'Follow my thoughts',
   Email: 'Say hello directly',
@@ -34,7 +34,7 @@ export const Contact: React.FC = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {portfolio.social.map((link, i) => {
-            const IconComponent = iconMap[link.icon] ?? Mail;
+            const IconComponent: LucideIcon = iconMap[link.icon] ?? Mail;
             const description = contactDescriptions[link.platform] ?? '';
 
             return (
@@ -48,11 +48,11 @@ export const Contact: React.FC = () => {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
                 whileHover={{ y: -4 }}
-                className="group flex items-center justify-between p-6 rounded-xl border border-border-subtle bg-bg-card transition-all duration-300 hover:border-accent-primary/40 hover:bg-accent-dim hover:shadow-[0_0_25px_rgba(0,245,212,0.12)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-primary"
+                className="group flex items-center justify-between p-6 rounded-xl border border-border-subtle bg-bg-card transition-all duration-300 hover:border-accent-primary/40 hover:bg-accent-dim hover:shadow-[0_0_25px_rgba(245,230,66,0.08)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-primary"
                 aria-label={`Contact via ${link.platform}`}
               >
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-lg border border-border-subtle bg-bg-secondary flex items-center justify-center group-hover:border-accent-primary/40 group-hover:text-accent-primary transition-all">
+                  <div className="w-12 h-12 rounded-lg border border-border-subtle bg-bg-secondary flex items-center justify-center group-hover:border-accent-primary/40 transition-all">
                     <IconComponent size={20} className="text-text-secondary group-hover:text-accent-primary transition-colors" />
                   </div>
                   <div>
@@ -70,7 +70,6 @@ export const Contact: React.FC = () => {
           })}
         </div>
 
-        {/* Email CTA */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -78,17 +77,17 @@ export const Contact: React.FC = () => {
           transition={{ delay: 0.4 }}
           className="text-center p-8 rounded-2xl border border-accent-primary/20 bg-accent-dim"
         >
-          <p className="font-mono text-accent-primary text-sm uppercase tracking-widest mb-3">
-            Preferred contact
+          <p className="font-mono text-accent-primary text-xs uppercase tracking-widest mb-3">
+            # preferred contact
           </p>
           <a
             href={`mailto:${portfolio.meta.email}`}
-            className="font-mono text-2xl sm:text-3xl font-bold text-white hover:text-accent-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-primary rounded"
+            className="font-mono text-xl sm:text-2xl font-bold text-white hover:text-accent-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-primary rounded"
           >
             {portfolio.meta.email}
           </a>
-          <p className="text-text-muted text-sm mt-3">
-            I typically respond within 24–48 hours.
+          <p className="text-text-muted text-sm mt-3 font-mono">
+            <span className="py-comment"># typically responds within 24–48 hours</span>
           </p>
         </motion.div>
       </div>

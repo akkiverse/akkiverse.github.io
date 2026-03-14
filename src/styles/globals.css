@@ -4,21 +4,20 @@
 
 @layer base {
   :root {
-    --accent: #f5e642;
-    --accent-dim: rgba(245, 230, 66, 0.08);
-    --accent-glow: 0 0 20px rgba(245, 230, 66, 0.25);
-    --bg-primary: #0d0d0d;
-    --bg-card: #161616;
-    --text-primary: #e8e8e8;
-    --text-secondary: #8b8b8b;
-    --border-subtle: rgba(255, 255, 255, 0.05);
-    --border-accent: rgba(245, 230, 66, 0.25);
+    --accent: #ff6b35;
+    --accent-dim: rgba(255, 107, 53, 0.10);
+    --bg-primary: #0b0e1a;
+    --bg-card: #131729;
+    --text-primary: #e8eaf0;
+    --text-secondary: #8892a4;
+    --border-subtle: rgba(255, 255, 255, 0.06);
+    --border-accent: rgba(255, 107, 53, 0.28);
+    /* Python official colours kept for accent line only */
     --py-blue: #3776ab;
-    --py-yellow: #f5e642;
+    --py-orange: #ff6b35;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
   html { scroll-behavior: smooth; }
 
   body {
@@ -28,28 +27,29 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
+    /* Subtle animated gradient on the body itself */
+    background-image:
+      radial-gradient(ellipse 80% 50% at 20% 20%, rgba(55, 118, 171, 0.07) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 80% 80%, rgba(255, 107, 53, 0.06) 0%, transparent 60%);
+    background-attachment: fixed;
   }
 
   ::selection {
-    background-color: rgba(245, 230, 66, 0.2);
+    background-color: rgba(255, 107, 53, 0.22);
     color: #fff;
   }
 
   ::-webkit-scrollbar { width: 3px; }
   ::-webkit-scrollbar-track { background: var(--bg-primary); }
-  ::-webkit-scrollbar-thumb { background: rgba(245, 230, 66, 0.3); border-radius: 2px; }
+  ::-webkit-scrollbar-thumb { background: rgba(255, 107, 53, 0.35); border-radius: 2px; }
   ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
 }
 
 @layer components {
-  /* Python logo snake-inspired accent line */
+  /* Python logo: blue → orange gradient line */
   .py-accent-line {
     height: 2px;
-    background: linear-gradient(90deg, var(--py-blue) 0%, var(--py-yellow) 100%);
-  }
-
-  .glow-text {
-    text-shadow: 0 0 25px rgba(245, 230, 66, 0.4);
+    background: linear-gradient(90deg, #3776ab 0%, #ff6b35 100%);
   }
 
   .card-hover {
@@ -59,9 +59,9 @@
   .card-hover:hover {
     transform: translateY(-2px);
     box-shadow:
-      0 0 0 1px rgba(245, 230, 66, 0.15),
-      0 8px 32px rgba(0, 0, 0, 0.6),
-      0 0 20px rgba(245, 230, 66, 0.05);
+      0 0 0 1px rgba(255, 107, 53, 0.18),
+      0 8px 32px rgba(0, 0, 0, 0.55),
+      0 0 24px rgba(255, 107, 53, 0.07);
   }
 
   .section-label {
@@ -69,24 +69,74 @@
     color: var(--text-secondary);
   }
 
-  /* Subtle dot grid for hero */
   .dot-grid {
-    background-image: radial-gradient(rgba(245, 230, 66, 0.05) 1px, transparent 1px);
+    background-image: radial-gradient(rgba(255, 107, 53, 0.07) 1px, transparent 1px);
     background-size: 28px 28px;
   }
 
-  /* Terminal window chrome */
+  /* Animated aurora blobs — placed as pseudo-elements on a wrapper */
+  .aurora-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .aurora-bg::before {
+    content: '';
+    position: absolute;
+    top: -20%;
+    left: -15%;
+    width: 55%;
+    height: 55%;
+    background: radial-gradient(ellipse, rgba(55, 118, 171, 0.13) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: aurora 14s ease-in-out infinite alternate;
+    will-change: transform, opacity;
+  }
+
+  .aurora-bg::after {
+    content: '';
+    position: absolute;
+    bottom: -15%;
+    right: -10%;
+    width: 50%;
+    height: 50%;
+    background: radial-gradient(ellipse, rgba(255, 107, 53, 0.10) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: aurora 18s ease-in-out infinite alternate-reverse;
+    will-change: transform, opacity;
+  }
+
+  /* Third blob — mid page, subtle blue */
+  .aurora-mid {
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40%;
+    height: 40%;
+    background: radial-gradient(ellipse, rgba(55, 118, 171, 0.07) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+    animation: aurora 20s ease-in-out infinite alternate;
+    will-change: transform, opacity;
+  }
+
+  /* Terminal chrome */
   .terminal-chrome {
-    background: #1a1a1a;
-    border: 1px solid rgba(255,255,255,0.07);
+    background: #0f1221;
+    border: 1px solid rgba(255, 255, 255, 0.07);
     border-radius: 10px;
     overflow: hidden;
   }
 
   .terminal-chrome-bar {
     height: 32px;
-    background: #222222;
-    border-bottom: 1px solid rgba(255,255,255,0.06);
+    background: #161b2e;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     display: flex;
     align-items: center;
     padding: 0 12px;
@@ -99,7 +149,6 @@
     border-radius: 50%;
   }
 
-  /* Blinking cursor */
   .terminal-cursor::after {
     content: '█';
     display: inline-block;
@@ -109,13 +158,13 @@
     font-size: 0.85em;
   }
 
-  /* Python keyword colors */
-  .py-keyword { color: #cc99cd; }
-  .py-string  { color: #7ec699; }
-  .py-comment { color: #555555; }
-  .py-func    { color: #6fb3d2; }
-  .py-number  { color: #f08d49; }
-  .py-class   { color: var(--accent); }
+  /* Syntax highlight classes */
+  .py-keyword { color: #c792ea; }
+  .py-string  { color: #c3e88d; }
+  .py-comment { color: #4a5568; }
+  .py-func    { color: #82aaff; }
+  .py-number  { color: #f78c6c; }
+  .py-class   { color: #ff6b35; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -125,4 +174,8 @@
     transition-duration: 0.01ms !important;
   }
   html { scroll-behavior: auto; }
+  .aurora-bg::before,
+  .aurora-bg::after,
+  .aurora-mid { animation: none !important; }
 }
+
